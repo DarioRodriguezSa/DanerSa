@@ -1,0 +1,77 @@
+{% extends 'pos/base.html' %}
+{% load static %}
+{% block title %}Realizar Compra{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/compras.css' %}">
+
+<h2 class="text-center">Realizar Compra</h2>
+
+<div class="row ml-0 mb-3">
+    <a href="{% url 'Apps.compras:compras' %}">
+        <button type="button" class="btn m-2 m-sm-3 btn-back">
+            <i class="fas fa-long-arrow-alt-left mr-2"></i>
+            Volver
+        </button>
+    </a>
+</div>
+
+<div class="row">
+    <!-- Primer cuadro -->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Inventario
+            </div>
+            <div class="card-body">
+                <!-- Contenido del primer cuadro -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for producto in inventario_info %}
+                            <tr>
+                                <td>{{ producto.nombre }}</td>
+                                <td>{{ producto.existencia }}</td>
+                                <!-- Otros campos del producto que desees mostrar -->
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <!-- Segundo cuadro -->
+    <div class="col-md-6" id="realizar-compra-cuadro">
+        <div class="card">
+            <div class="card-header">
+                Realizar Compra
+            </div>
+            <div class="card-body">
+                <!-- Contenido del segundo cuadro -->
+                <!-- Formulario de compra -->
+                <form method="post" action="{% url 'Apps.compras:realizar_compra_submit' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}  <!-- Representa el formulario -->
+                    <button type="submit" class="btn btn-primary">Realizar Compra</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Agrega este script al final de tu archivo HTML -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Muestra el cuadro del formulario cuando la página se carga
+        document.getElementById('realizar-compra-cuadro').style.display = 'block';
+    });
+</script>
+
+{% endblock %}

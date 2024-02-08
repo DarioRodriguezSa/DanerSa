@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Ventas</title>
+</head>
+<body>
+    <h1>Reporte de Ventas</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Fecha</th>
+                <th>Cliente</th>
+                <th>Total</th>
+                <th>Anticipo</th>
+                <th>Saldo Restante</th>
+                <th>Productos Vendidos</th>
+                <th>Cantidad Vendida</th>
+                <th>Precio de Compra</th>
+                <th>Precio de Venta</th>
+                <th>Ganancia</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for venta in ventas %}
+                <tr>
+                    <td>{{ venta.user.username }}</td>
+                    <td>{{ venta.fecha }}</td>
+                    <td>{{ venta.id_clientes.nombre }}</td>
+                    <td>{{ venta.total }}</td>
+                    <td>{{ venta.anticipo }}</td>
+                    <td>
+                        {% with ultima_transaccion=venta.transaccion_set.last %}
+                            {{ ultima_transaccion.saldo_venta|default:"0" }}
+                        {% endwith %}
+                    </td>
+                    <td>
+                        {% for detalle in venta.detalleventa_set.all %}
+                            {{ detalle.id_producto.nombre }},
+                        {% endfor %}
+                    </td>
+                    <td>{{ venta.detalleventa_set.all.count }}</td>
+                    <td>{{ venta.get_precio_compra }}</td>
+                    <td>{{ venta.get_precio_venta }}</td>
+                    <td>{{ venta.get_total_ganancia }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{% block title %}{% endblock %} | Daner</title>
+
+    {% load static %}
+
+    <!-- Bootstrap -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/inventario.css' %}">
+    <!-- Fuentes -->
+    <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+
+    <!-- Estilos -->
+    <link href="{% static 'css/business-casual.css' %}" rel="stylesheet">
+    <link href="{% static 'css/styleLittle.css' %}" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{% static 'daner.png' %}"/>
+    
+
+
+  </head>
+
+  <body>
+ 
+    <h2 class="site-heading text-center text-white d-none d-lg-block">
+      <span class="site-heading-lower">Daner</span>
+    </h2>
+    
+        
+
+    <!-- Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="{% url 'Apps.pos:lista_ventas_graph' %}">Daner</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item active px-lg-4">
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'Apps.pos:lista_ventas_graph' %}">Inicio</a>
+            </li>
+            <li class="nav-item px-lg-4">
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'Apps.clientes:lista_clientes' %}">Clientes</a>
+            </li>
+            <li class="nav-item px-lg-4">
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'Apps.compras:compras' %}">Compras</a>
+            </li>
+            <li class="nav-item px-lg-4">
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'Apps.inventario:index' %}">Inventario</a>
+            </li>
+            <li class="nav-item px-lg-4">
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'Apps.ventas:lista_ventas' %}">Ventas</a>
+            </li>   
+            <li class="nav-item px-lg-4">
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'Apps.rutas:lista_rutas' %}">Rutas</a>
+            </li> 
+            <li class="nav-item px-lg-4">
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'Apps.ventas:report' %}">Reportes</a>
+            </li>
+            <li class="nav-item px-lg-4 " >
+              <a class="nav-link text-uppercase text-expanded" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 "></i>
+                  Cerrar sesión
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      {% include 'pos/messages.html' with messages=messages%}
+  </div>
+    {% block content %} {% endblock %}
+
+    <!-- Pié de página -->
+    <footer class="footer text-faded text-center py-5">
+   
+      <div class="container">
+              <p class="m-0 mbt">
+              <hr>
+        	<a href="" class="link">Contacto</a> 
+		</p>
+        <p class="m-0 mbt1">&copy; DistribuidoraDaner 2024</p>
+      </div>
+	</footer>
+  {% include 'pos/logout_modal.html' %}
+    <!-- Bootstrap -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/inventario.js' %}"></script>
+    {% block javascripts %}{% endblock javascripts %}
+  </body>
+
+</html>
